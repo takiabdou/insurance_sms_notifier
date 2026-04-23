@@ -1,0 +1,20 @@
+# Environnements virtuels
+venv/
+build_env/
+__pycache__/
+*.pyc
+
+# Fichiers de compilation
+dist/
+build/
+*.spec
+
+# Fichiers de logs et données utilisateur (à préserver)
+logs/*.log
+data/*.csv
+data/*.xlsx
+user_config.json
+
+# Fichiers système
+.DS_Store
+Thumbs.db
