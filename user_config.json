@@ -1,0 +1,9 @@
+{
+  "gateway_url": "http://192.168.1.9:8080/message",
+  "gateway_user": "admin",
+  "gateway_password": "lg_1HUtj",
+  "days_before": 5,
+  "exact_mode": false,
+  "language": "fr",
+  "theme": "light"
+}
