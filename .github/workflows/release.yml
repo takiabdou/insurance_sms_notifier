@@ -1,0 +1,44 @@
+name: Auto-Release 🚀
+
+# Ce script se lance automatiquement quand on crée un Tag qui commence par 'v'
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest # On utilise un serveur Windows pour la compatibilité
+
+    steps:
+      # 1. Récupérer le code de votre projet
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Nettoyer les fichiers inutiles (pour que le ZIP soit léger)
+      - name: Clean up
+        run: |
+          Remove-Item -Recurse -Force .git
+          Remove-Item -Recurse -Force __pycache__
+          Remove-Item -Recurse -Force data\_update
+          Remove-Item -Recurse -Force build
+          Remove-Item -Recurse -Force dist
+
+      # 3. Créer le fichier ZIP
+      - name: Create Release Zip
+        run: |
+          $TagName = $env:GITHUB_REF -replace 'refs/tags/', ''
+          $ZipName = "insurance_sms_$TagName.zip"
+          Compress-Archive -Path * -DestinationPath $ZipName
+
+      # 4. Publier le ZIP sur GitHub Releases
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "*.zip"
+          name: "Version ${{ github.ref_name }}"
+          body: "Mise à jour automatique de la version ${{ github.ref_name }}."
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
