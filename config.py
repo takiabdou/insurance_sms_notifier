@@ -11,12 +11,11 @@ IMAGES_DIR      = os.path.join(BASE_DIR, "images")
 SENT_LOG_PATH   = os.path.join(DATA_DIR, "sent_log.csv")
 APP_LOG_PATH    = os.path.join(LOG_DIR,  "app.log")
 CONFIG_FILE     = os.path.join(BASE_DIR, "user_config.json")
-# ── Configuration GitHub pour les mises à jour ───────────────
-GITHUB_OWNER = "takiabdou"      #← Remplacez par votre nom GitHub
-GITHUB_REPO  = "crma-sms-notifier"          #← Nom exact de votre dépôt
 
-# ── Version de l'application ─────────────────────────────────
-APP_VERSION = "1.0.0"  #← Incrémentez à chaque nouvelle version (1.0.1, 1.1.0, etc.)
+# ── Configuration GitHub pour les mises à jour ───────────────
+GITHUB_OWNER = "takiabdou"
+GITHUB_REPO  = "insurance_sms_notifier"
+APP_VERSION = "1.0.1"  # ✅ NOUVELLE VERSION
 
 # ── Valeurs par défaut ────────────────────────────────────────
 DEFAULT_GATEWAY_URL      = "http://192.168.1.9:8080/message"
@@ -30,7 +29,7 @@ GATEWAY_URL      = DEFAULT_GATEWAY_URL
 GATEWAY_USER     = DEFAULT_GATEWAY_USER
 GATEWAY_PASSWORD = DEFAULT_GATEWAY_PASSWORD
 DAYS_BEFORE      = DEFAULT_DAYS_BEFORE
-EXACT_DAY_MODE   = DEFAULT_EXACT_MODE  # False=Plage, True=Exact
+EXACT_DAY_MODE   = DEFAULT_EXACT_MODE
 APP_LANGUAGE     = "fr"
 APP_THEME        = "dark"
 
@@ -41,11 +40,12 @@ SMS_TEMPLATES_FR = {
 }
 
 SMS_TEMPLATES_EN = {
-    "auto": "Monsieur {nom}, votre assurance {marque} immatriculée {matricule} expire dans {days_left} jour(s). Merci de renouveler à temps. CRMA Saïda.",
-    "generic": "Monsieur {nom}, votre assurance {groupe} expire dans {days_left} jour(s). Merci de renouveler à temps. CRMA Saïda.",
+    "auto": "Dear {nom}, your insurance for {marque} (plate: {matricule}) expires in {days_left} day(s). Please renew on time. CRMA Saïda.",
+    "generic": "Dear {nom}, your {groupe} insurance expires in {days_left} day(s). Please renew on time. CRMA Saïda.",
 }
 
 # ── Colonnes Excel & Métier ───────────────────────────────────
+# ✅ CORRECTION : AUCUN ESPACE à la fin des chaînes
 COL_NOM         = "Nom"
 COL_TEL         = "Tél"
 COL_EXPIRATION  = "Expiration"
@@ -56,8 +56,8 @@ AUTO_GROUPE_VALUE = "10 Auto Matériel"
 COUNTRY_CODE    = "+213"
 
 # ── Structure du fichier Excel ────────────────────────────────
-EXCEL_HEADER_ROW = 5        # Ligne 6 (index 0-based = 5) contient les en-têtes
-EXCEL_DATA_START = 7        # Ligne 8 (index 0-based = 7) contient les données
+EXCEL_HEADER_ROW = 5
+EXCEL_DATA_START = 7
 
 # ── Chargement et Sauvegarde ──────────────────────────────────
 def load_user_config():
